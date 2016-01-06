@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stock Chart</title>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="/web/assets/css/stockchart.css" />
+
+    <!-- <script data-main="scripts/main" src="web/assets/js/require.js"></script> -->
+
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="/web/assets/js/Console.js"></script>
+    <script src="/web/assets/js/Figure.js"></script>
+    <script src="/web/assets/js/wshandler.js"></script>
+    <script src="/web/assets/js/WebSocketClient.js"></script>
+    <script src="/web/assets/js/websocketwidget_stockchart.js"></script>
+  </head>
+  <body>
+    <div id="content">
+      
+      <h1>Stock Chart</h1>
+      
+      <label style="color: #fff">Number of charts:</label>
+      <select id="column"></select>
+
+
+      <div id="figcontrol"></div>
+
+      <!--   <label>Ticker: </label> -->
+      <!--   <select id="ticker"></select> -->
+
+      <!--   <div> -->
+      <!--     <label>Pick Date Range: </label> -->
+      <!--     <input type="date" id="dailymin" min="2006-01-01" value="2014-09-01"> -->
+      <!--     <input type="date" id="dailymax" max="2016-01-01" value="2015-12-01"> -->
+      <!--     <button id="update">Update</button> -->
+      <!--   </div> -->
+
+      <!-- </div> -->
+
+      <!-- <div class="text_io" id="console"></div> -->
+
+      <!-- <div id="figs"></div> -->
+
+    </div>
+    
+    <script src="/web/assets/js/stockchart-multicolumn.js"></script>
+
+
+  </body>
+</html>

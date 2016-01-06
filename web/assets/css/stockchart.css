@@ -1,0 +1,97 @@
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html,body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 100%;
+  background: #333;
+  color: #33383D;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  margin: 0.5rem 0 0.5rem 0;
+  color: #999;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #999;
+}
+
+p {
+  font-size: 0.9rem;
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+#content {
+    margin: 0px auto;
+    width: 1200px;
+    text-align: left;
+}
+
+#figcontrol {
+    width: 1200px;
+    min-height: 60px;
+    float: left;
+    background: #aaa;
+    margin: auto;
+}
+
+#figs {
+    width: 960px;
+    min-height: 660px;
+    float: left;
+    background: #eee;
+    margin: auto;
+}
+
+/* Figure */
+.fig {
+	/* margin: 4px; */
+        /* padding: 4px; */
+    /* width: 960px; */
+    min-height: 720px;
+    float: left;
+    background: #eee;
+    margin: auto;
+}
+
+/* Console */
+.text_io {
+    margin: 0px;
+        /* width: 960px; */
+        height: 80px;
+        float: left;
+	/* color: #eee; */
+	background: #aaa;
+	/* border-radius: 15px; */
+	overflow-y: scroll;
+	overflow-x: scroll;
+}
+
+.msg {
+	margin: 0px 0px;
+        /* padding: 0.1rem 1em; */
+}
+.msg i {
+	border-bottom: 1px solid #eee;
+}
+
+label {
+    display: inline-block;
+    width: 150px;
+    padding: 0.6rem 1em;
+    /*color: white;*/
+    font-size: 0.9rem;
+    /*margin: 0 0.25rem;*/
+    /*text-align: center;*/
+}
+
+
