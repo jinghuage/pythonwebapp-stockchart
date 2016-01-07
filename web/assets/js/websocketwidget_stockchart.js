@@ -79,8 +79,8 @@ websocketwidget.stockchart = function(){
 
 
         var mainchart = ['ClosePrice', 'OCHL_Candlestick', 'OCHL_Candlestick(5)'];
-        var addons = ['None', 'DollarVolume', 'MACD(12,26,9)', 'RSI(14)', 'ATR(14)'];
-        var incharts = ['None', 'MA(13)', 'MA(20)', 'MA(50)', 'MA(200)', 'BollingerBands', 'TrendLines'];
+        var addons = ['None', 'DollarVolume', 'ADL', 'MACD(12,26,9)', 'RSI(14)', 'ATR(14)'];
+        var incharts = ['None', 'MA(13)', 'MA(20)', 'MA(50)', 'MA(200)', 'BollingerBands'];
 
         // One main chart
         td1.append("<label>Main Chart type:</label>");

@@ -3,7 +3,7 @@
 
 import re
 import numpy as np
-
+import pandas as pd
 
 def moving_average(x, n, type='simple'):
     """
@@ -188,10 +188,16 @@ def compute_indicator(df, label):
             #print 'compute indicator:', attr
             df[attr] = moving_average(df.Close, n, type='simple')     
             #print df.columns
-    elif itype == 'bb':
-        attr = ['bbl', 'bbu']
+    elif itype == 'bollingerbands':
+        attr0 = 'bbl'
+        attr1 = 'bbu'
+        if not attr0 in df:
+            print 'compute indicator:', attr0, attr1
+            df[attr0], df[attr1] = bollinger_bands(df.Close)
+    elif itype == 'adl':
+        attr = itype
         if not attr in df:
-            df[attr] = bollinger_bands(df.Close)
+            df[attr] = adl(df.High, df.Low, df.Close, df.Volume)
     elif itype == 'atr':
         n = int(items[1])
         attr = itype + items[1]
@@ -273,11 +279,9 @@ def graph_incharts(ax, Date, data, names):
         attr = ''.join(items)
         
         if itype == 'ma':
-            graph_ma(ax, Date, data, name, attr)
+            graph_ma(ax, Date, data, name, attr) #use auto attr and label
         elif itype == 'bollingerbands':
-            graph_bb(ax, Date, data, name, attr)
-        elif itype == 'trendlines':
-            graph_trendlines(ax, Date, data, name, attr)
+            graph_bb(ax, Date, data, name, '') #use default attr 
 
 
 def graph_addons(axs, Date, data, names):
@@ -306,6 +310,8 @@ def graph_addons(axs, Date, data, names):
             graph_rsi(ax, Date, data, name, attr)
         elif itype == 'atr':
             graph_atr(ax, Date, data, name, attr)
+        elif itype == 'adl':
+            graph_adl(ax, Date, data, 'Accum/Dist', attr) #use custom label text
     
 
 def graph_ma(ax, Date, data, label, attr):
@@ -313,13 +319,12 @@ def graph_ma(ax, Date, data, label, attr):
     Date: x axis data value, don't need to be date exactly, but when ax x label is created, date will be used
     to translate as datetime.date objects -- extra handling
     data: data includes mas
-    mas: array of ma names, e.g. ['ma20', 'ma200']
     '''
 
     #print '--'
     #print 'stock_graph.graph_ma()', label, attr
 
-    # color = ['blue', 'red']
+    # color = ['blue', 'red', 'purple']
     # for ma in mas:        
     #     items = re.findall(r'(\d+)', ma)
     #     print items
@@ -332,10 +337,14 @@ def graph_ma(ax, Date, data, label, attr):
 
     import random
     colors = "bgrcmykw"
-    #color_index = 0
-    #rcolor = np.random.rand(3,1)
+    n = re.findall(r'(\d+)', attr)[0]
+    print n
+    #map n to index between 0 to 8
     #r = random.randint(0,8)
-    ax.plot(Date, mydata, color=(random.random(), random.random(), random.random()), lw=2, label=label)
+    r = int(n) % 8 
+    print r
+    ax.plot(Date, mydata, color=colors[r],#(random.random(), random.random(), random.random()), 
+            lw=2, label=label)
 
 
     # Now add the legend with some customizations.
@@ -355,8 +364,12 @@ def graph_ma(ax, Date, data, label, attr):
 
 def graph_bb(ax, Date, data, label, attr):
 
-    fillcolor = (1, 1, 0, 0.5)
-    ax.fill_between(Date, data['bbl'], data['bbu'], facecolor=fillcolor, edgecolor=fillcolor)
+    #print '--'
+    #print "stock_graph.graph_bb()", label, attr
+
+    fillcolor = (0.5, 0.5, 0, 0.5)
+    ax.fill_between(Date, data['bbl'], data['bbu'], facecolor=fillcolor, edgecolor=fillcolor, alpha=0.2)
+
 
 
 
@@ -377,6 +390,22 @@ def graph_volume(ax, Date, data, label, attr):
     poly = ax.fill_between(Date, mydata, 0, label='Volume', facecolor=fillcolor, edgecolor=fillcolor)
     ax.set_ylim(0, vmax)
     ax.set_yticks([])
+    for label in ax.get_xticklabels():
+        label.set_visible(False)
+
+def graph_adl(ax, Date, data, label, attr):
+    print '--'
+    print "stock_graph.graph_bb()", label, attr
+
+    mydata = data[attr]
+    print mydata[:10]
+    print mydata[-10:]
+
+    # what color to use: http://matplotlib.org/examples/color/named_colors.html
+    ax.plot(Date, mydata, color='purple', lw=2, label=label)
+    ax.set_yticks([])
+    ax.text(0.025, 0.95, label, va='top', transform=ax.transAxes, fontsize=12)
+
     for label in ax.get_xticklabels():
         label.set_visible(False)
 

@@ -1,7 +1,33 @@
-.. _stockchart:
+
 
 A Websocket viz application : Stockchart
 ========================================
+
+Run the code
+-------------
+
+each file should have a test unit (if __name__ == '__main__') if you run it standalone. 
+
+For example, edit quotes.py, change symbol and start date, then run::
+
+  python quotes.py 
+
+This will download the daily data for this symbol from start date to today, then save to a csv file
+
+
+To test the graph in standalone mode, edit the test unit code in graph.py, then run::
+
+  python graph.py
+
+at function graph.init_data(), line 179. If you comment/uncomment lines to use local data from csv file
+at function graph.plot_to_html(), line 344. If you uncomment mpld3.show(), you can see graph served at localhost
+
+Or if you don't want to save to html yet, call graph.plotdata() instead. uncomment plt.show() to show in matplotlib rendering backend. 
+
+
+jinja2 are used for testing template html file serving, ignore it if you are not interested in template yet
+
+
 
 Description: 
 -------------

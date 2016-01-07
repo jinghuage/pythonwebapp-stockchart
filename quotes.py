@@ -351,7 +351,7 @@ def play_with_datetime():
 
 
 if __name__ == '__main__':
-    symbol = 'IWM'
+    symbol = 'AAPL'
     startstr = '20060101'
     st1str = '20150801'
     st2str = '20151202'

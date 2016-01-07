@@ -180,10 +180,10 @@ class graph:
         print '--'
         print 'graph.init_data()'
 
-        #self.alldata = quotes.get_quote_daily_pandas(self.info['symbol'], self.info['timerange'])
+        self.alldata = quotes.get_quote_daily_pandas(self.info['symbol'], self.info['timerange'])
 
         #for local testing
-        self.alldata = quotes.get_quote_csv(self.info['symbol'], self.info['timerange'])
+        #self.alldata = quotes.get_quote_csv(self.info['symbol'], self.info['timerange'])
 
         stock_graph.pre_compute_indicators(self.alldata)
 
@@ -270,6 +270,10 @@ class graph:
 
 
     def reset_xticks_date(self):
+        '''
+        Use mpld3 plugins to fix the chart artifacts introduced by mplexportor
+        '''
+
         print '--'
         print 'graph.reset_xticks_date()'
 
@@ -402,7 +406,7 @@ if __name__ == '__main__':
 
 
 
-    symbol = 'SPY'
+    symbol = 'IWM'#'SPY'
     startstr = '20060101'
     st1str = '20150801'
     st2str = '20151202'
@@ -437,34 +441,35 @@ if __name__ == '__main__':
     mygraph = graph()
 
     vargs = ['init', 
-             'SPY', 
+             'AAPL', 
              '2006-01-01', 'today', 
              'ClosePrice',
-             'DollarVolume', 'MACD(12,26,9)', 'RSI(14)', 
-             'MA(20)', 'MA(200)', 'MA(50)']
+             'DollarVolume', 'ADL', 'RSI(14)', 
+             'MA(20)', 'MA(200)', 'BollingerBands']
     mygraph.update(vargs)
 
     #    var mainchart = ['ClosePrice', 'OCHL_Candlestick', 'OCHL_Candlestick(5)'];
-    #    var addons = ['None', 'DollarVolume', 'MACD(12,26,9)', 'RSI(14)', 'ATR(14)'];
-    #    var incharts = ['None', 'MA(20)', 'MA(50)', 'MA(200)', 'BollingerBands', 'TrendLines'];
+    #    var addons = ['None', 'DollarVolume', 'ADL', 'MACD(12,26,9)', 'RSI(14)', 'ATR(14)'];
+    #    var incharts = ['None', 'MA(20)', 'MA(50)', 'MA(200)', 'BollingerBands'];
 
     # all test cases
-    vargs = ['range', '2014-01-11', '2015-11-10']
+    vargs = ['range', '2015-01-11', '2016-1-10']
     mygraph.update(vargs)
 
 
-    # vargs = ['main', 'ClosePrice']
-    # vargs = ['inchart_id', '0', 'MA(13)']
-    vargs = ['addon_id', '0', 'None']
-    mygraph.update(vargs)
-    vargs = ['addon_id', '1', 'None']
-    mygraph.update(vargs)
-    vargs = ['addon_id', '2', 'None']
-    # vargs = ['addon_id', '1', 'ATR(14)']
-    # vargs = ['addon_id', '2', 'RSI(14)']
+    # # vargs = ['main', 'ClosePrice']
+    # # vargs = ['inchart_id', '0', 'MA(13)']
+    # vargs = ['addon_id', '0', 'None']
+    # mygraph.update(vargs)
+    # vargs = ['addon_id', '1', 'None']
+    # mygraph.update(vargs)
+    # vargs = ['addon_id', '2', 'None']
+    # # vargs = ['addon_id', '1', 'ATR(14)']
+    # # vargs = ['addon_id', '2', 'RSI(14)']
+
+    # mygraph.update(vargs)
 
 
-    mygraph.update(vargs)
     #mygraph.plotdata()
     mygraph.plot_to_html()
 
