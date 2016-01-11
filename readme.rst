@@ -86,18 +86,22 @@ javascript files: ./web/assets/js/
 css files: ./web/assets/css/
 
 scripts:
-* websocketclient.js, wshandler.js  -- web socket connection and event handling
-* Console.js -- bind to html div container to display messages send to and receive from server
-* Figure.js -- bind to html div container to display D3 script received from server
-* stockchart-multicolumn.js: Let user select number of charts, and create stockchart widgets accordingly
-* websocketwidget_stockchart.js:
 
-     A stockchart widget generator, implemented as Javascript Module pattern. The generator itself is a function, which take a 'table > tr' as input. This tr should contaion two 'td', one td is used to hold controls, the other to hold the figure (actually D3 script which will create svg graph) received from server. The generator's implementation include:
+* websocketclient.js, wshandler.js  -- web socket connection and event handling
+
+* Console.js -- bind to html div container to display messages send to and receive from server
+
+* Figure.js -- bind to html div container to display D3 script received from server
+
+* stockchart-multicolumn.js: Let user select number of charts, and create stockchart widgets accordingly
+
+* websocketwidget_stockchart.js: A stockchart widget generator, implemented as Javascript Module pattern. The generator itself is a function, which take a 'table > tr' as input. This tr should contaion two 'td', one td is used to hold controls, the other to hold the figure (actually D3 script which will create svg graph) received from server. The generator's implementation include:
  
-     - create all user input widgets and register their event handler to collect configurations for the stockchart and send them to server 
-     - create a console div holder which display controlling message communication between websocket server and client
-     - create a figure div holder to receive plot from websocket server 
-     - create websocket client attached to the current chart widget, when the chart is deleted, the websocket client will disconnect from server and delete itself. 
+  - create all user input widgets and register their event handler to collect configurations for the stockchart and send them to server 
+  - create a console div holder which display controlling message communication between websocket server and client
+  - create a figure div holder to receive plot from websocket server 
+  - create websocket client attached to the current chart widget, when the chart is deleted, the websocket client will disconnect from server and delete itself. 
+
 
 **Note: each stockchart widget bind a websocket client to its html container. So when multiple stockchart widgets are created, their will be same number of websocket clients created.**
 
@@ -106,12 +110,14 @@ Server side python code:
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * server.py: the tornado web server 
+
   - open connection, create a websocket client and a graph object for each connection, 
   - receive message from clients
   - forward client request to a python graph module 
   - send output from graph module back to client as response
 
 * graph.py : the graph module, create matplotlib figure by request. its functions are:
+
   - upon figure configuration request, update figure layout, e.g. change figure size, position and size subplots, etc
   - upon data request, call python data collector module
   - upon indicator request, call python indicator calculation module
@@ -122,4 +128,4 @@ Server side python code:
 
 * quotes.py -- data collector from yahoo finance, or from csv datasets
 
-**Note: All data will be stored as pandas DataFrame object. **
+**Note: All data will be stored as pandas DataFrame object.**
