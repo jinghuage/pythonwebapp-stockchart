@@ -55,10 +55,10 @@ To add another indicator, things you need to do:
 * add chart name in websocketwiget_stockchart.js, it will be sent to server as chart update argument
 
 * in stock_graph.py, add : 
-  + adl() function to compute the indicator
-  + in compute_indicator() function, add an *elif* clause for adl attribute
-  + depends on this indicator will be drawn as inchart or addon chart, add an *elif* clause in graph_incharts() or graph_addons() function
-  + graph_adl() function to draw the chart
+  - adl() function to compute the indicator
+  - in compute_indicator() function, add an *elif* clause for adl attribute
+  - depends on this indicator will be drawn as inchart or addon chart, add an *elif* clause in graph_incharts() or graph_addons() function
+  - graph_adl() function to draw the chart
 
 
 
